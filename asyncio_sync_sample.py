@@ -41,7 +41,7 @@ async def bulk_crawl(urls: set, **kwargs) -> None:
     await asyncio.gather(*tasks)
 
 
-def main() -> None:
+if __name__ == "__main__":
     urls = {
         "https://www.google.com",
         "https://www.python.org",

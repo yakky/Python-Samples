@@ -12,6 +12,8 @@ aiohttp = "^3.8.5"
 requests = "^2.31.0"
 fastapi = "^0.103.1"
 uvicorn = "^0.23.2"
+mypy = "^1.6.1"
+types-requests = "^2.31.0.10"
 
 [build-system]
 requires = ["poetry-core"]

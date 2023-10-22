@@ -27,7 +27,8 @@ class OptDict(TypedDict):
     min_price: NotRequired[Decimal]
 
 
-def calculate(items: list[Item], options: OptDict | None) -> Decimal:
+def calculate(items: list[Item], options: OptDict | None) -> Decimal | int:
+    options = options or OptDict(min_quantity=0)
     values = [
         Decimal(format(item.quantity, ".2f")) * item.price
         for item in items
@@ -39,9 +40,13 @@ def calculate(items: list[Item], options: OptDict | None) -> Decimal:
 
 
 if __name__ == "__main__":
-    p1 = Product(quantity=3.5, price=Decimal("10.0"), name="product1")
+    quantity: float = 3.5
+    base_price: Decimal = Decimal("10.0")
+
+    p1 = Product(quantity=quantity, price=base_price, name="product1")
     p2 = Product(quantity=2, price=Decimal("5.0"), name="product2")
     s1 = StockItem(quantity=2.1, price=Decimal("10.0"), sku="stock1")
     s2 = StockItem(quantity=1.9, price=Decimal("1.0"), sku="stock2")
 
     total = calculate([p1, p2, s1, s2], {"min_quantity": 2, "min_price": Decimal("2.0")})
+    print(f"Total: {total}")
